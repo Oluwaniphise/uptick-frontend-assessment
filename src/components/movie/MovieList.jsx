@@ -85,7 +85,7 @@ export const MovieList = () => {
       <div className="grid grid-cols-2 md:grid-cols-5">
         {movies &&
          movies.filter((item) => {
-          return search.toLowerCase() === "" ? item : item.original_title.toLowerCase().includes(search)
+          return search.toLowerCase() === "" ? item : item.original_title.toLowerCase().includes(search.toLowerCase())
          }).map((movie) => {
             return (
               <div key={movie.id}
