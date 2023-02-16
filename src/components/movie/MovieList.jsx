@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { API_URL } from "./base_url";
-import { IsLoading } from "./IsLoading";
+import { API_URL, GENRES_URL } from "../base_url";
+import { IsLoading } from "../IsLoading";
 import { FaPlusCircle} from 'react-icons/fa';
 import { MovieDetailModal } from "./MovieDetailModal";
+import { SearchBar } from "./SearchBar";
+import { FaSearch } from 'react-icons/fa'
 
 
 const API_KEY = "7da402ce4c68f27f0ae54fe86e581ba7";
@@ -17,6 +19,8 @@ export const MovieList = () => {
   const [movieLoading, setMovieLoading] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState({});
   const [showMovieModal, setShowMovieModal] = useState(false);
+  const [genres, setGenres] = useState([])
+  const [search, setSearch] = useState('');
   
   // function that calls the TMDB API
   const fetchMovies = async () => {
@@ -25,6 +29,7 @@ export const MovieList = () => {
       await axios.get(`${API_URL}?api_key=${API_KEY}`).then((res) => {
         setMovieLoading(false);
         setMovies(res.data.results);
+        console.log(res)
       });
     } catch (err) {
       console.log(err);
@@ -32,10 +37,23 @@ export const MovieList = () => {
     }
   };
 
+  // get genres
+  const getGenres = async () => {
+    try {
+      await axios.get(`${GENRES_URL}?api_key=${API_KEY}`).then((res) => {
+       setGenres(res.data.genres)
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   // useEffect loads the function when page renders
   useEffect(() => {
     fetchMovies();
+    getGenres()
   }, []);
+
 
   // handles the over event so one movie title and detail is shown at a time
   const handleHover = (id) =>{
@@ -45,7 +63,8 @@ export const MovieList = () => {
     setHover(id);
     setShowTitle(true) 
   }
-console.log(movies)
+
+
   // handles selected movie
   const handleSelectedMovie = (movie) => {
     setSelectedMovie(movie)
@@ -53,12 +72,21 @@ console.log(movies)
   }
 
   return (
-    <section className="container mx-auto">
+    <section className="py-[4rem] container mx-auto">
+
+      {/* <SearchBar movies={movies} setMovies={setMovies} /> */}
+      <form  className='bg-white flex flex-row px-[3%] justify-between items-center  mb-[1.5rem] max-w-[350px] rounded-[30px]'>
+        <input value={search} className="outline-none text-black py-[0.5rem] px-[0.5rem] rounded-[30px]"  placeholder="Search by movie name" onChange={(e) => setSearch(e.target.value)} />
+        <FaSearch className='text-[#424242]' />
+      </form>
+
       {showMovieModal && <MovieDetailModal item={selectedMovie} setShowMovieModal={setShowMovieModal} />}
       {movieLoading ? <IsLoading /> : (
       <div className="grid grid-cols-2 md:grid-cols-5">
         {movies &&
-          movies.map((movie) => {
+         movies.filter((item) => {
+          return search.toLowerCase() === "" ? item : item.original_title.toLowerCase().includes(search)
+         }).map((movie) => {
             return (
               <div key={movie.id}
                 onPointerEnter={() => handleHover(movie.id)}

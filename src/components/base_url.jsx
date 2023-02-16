@@ -1,1 +1,2 @@
-export const API_URL = 'https://api.themoviedb.org/3/movie/popular'
+export const API_URL = 'https://api.themoviedb.org/3/movie/popular';
+export const GENRES_URL = 'https://api.themoviedb.org/3/genre/movie/list'
