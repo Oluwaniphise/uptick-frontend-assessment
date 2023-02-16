@@ -25,7 +25,12 @@ module.exports = {
     
 
     },
-    extend: {},
+    extend: {
+      fontFamily: {
+        Roboto: ['Roboto Mono', 'sans-serif'],
+        
+      }
+    },
   },
   plugins: [],
 }

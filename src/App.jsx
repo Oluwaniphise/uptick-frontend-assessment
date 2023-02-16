@@ -5,7 +5,7 @@ import { Navbar } from './components/Navbar'
 function App() {
 
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black font-Roboto text-white">
       <Navbar />
       <Hero />
       <MovieList />
