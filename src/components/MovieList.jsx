@@ -45,11 +45,10 @@ export const MovieList = () => {
     setHover(id);
     setShowTitle(true) 
   }
-
+console.log(movies)
   // handles selected movie
   const handleSelectedMovie = (movie) => {
     setSelectedMovie(movie)
-    console.log('hie')
     setShowMovieModal(true)
   }
 
