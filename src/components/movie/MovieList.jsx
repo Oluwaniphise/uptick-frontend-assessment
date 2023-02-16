@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { API_URL, GENRES_URL } from "../base_url";
+import { API_URL, API_KEY } from "../base_url";
 import { IsLoading } from "../IsLoading";
 import { FaPlusCircle} from 'react-icons/fa';
 import { MovieDetailModal } from "./MovieDetailModal";
@@ -8,7 +8,7 @@ import { SearchBar } from "./SearchBar";
 import { FaSearch } from 'react-icons/fa'
 
 
-const API_KEY = "7da402ce4c68f27f0ae54fe86e581ba7";
+
 const API_IMG = "https://image.tmdb.org/t/p/w500";
 
 export const MovieList = () => {
@@ -26,7 +26,7 @@ export const MovieList = () => {
   const fetchMovies = async () => {
     setMovieLoading(true);
     try {
-      await axios.get(`${API_URL}?api_key=${API_KEY}`).then((res) => {
+      await axios.get(`${API_URL}movie/popular?api_key=${API_KEY}`).then((res) => {
         setMovieLoading(false);
         setMovies(res.data.results);
         console.log(res)
@@ -40,7 +40,7 @@ export const MovieList = () => {
   // get genres
   const getGenres = async () => {
     try {
-      await axios.get(`${GENRES_URL}?api_key=${API_KEY}`).then((res) => {
+      await axios.get(`${GENRES_URL}genre/movie/list?api_key=${API_KEY}`).then((res) => {
        setGenres(res.data.genres)
       });
     } catch (err) {
