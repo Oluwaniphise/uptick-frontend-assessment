@@ -36,7 +36,8 @@ export const FilterGenre = ({setMovies}) => {
     getAllGenres();
     getMoviesGenres();
   }, [genreFilter]);
-  console.log(genreFilter);
+
+  
   return (
     <section className="max-w-[200px]">
       <select onChange={(e) => setGenreFilter(e.target.value)} className="block w-full p-2 mb-6 text-sm text-black">

@@ -84,7 +84,7 @@ export const MovieList = () => {
       {movieLoading ? (
         <IsLoading />
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {movies &&
             movies
               .filter((item) => {
@@ -100,7 +100,7 @@ export const MovieList = () => {
                     key={movie.id}
                     onPointerEnter={() => handleHover(movie.id)}
                     onClick={() => handleSelectedMovie(movie)}
-                    // mr-[0.9rem] md:mr-[2rem]
+                   
                     className="relative cursor-pointer max-w-[300px] mb-[2rem] mx-[1rem] "
                   >
                     <img

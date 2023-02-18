@@ -29,9 +29,9 @@ export const MovieDetails = ({ item }) => {
         <IsLoading />
       ) : (
         <>
-          <h1 className="my-[0.5rem]">
+          <h1 className="my-[0.5rem] text-[1.5rem] mb-[1rem] font-bold text-center">
             {" "}
-            <span className="font-bold">Title: </span> {movie.title}{" "}
+            <span className="font-bold"></span> {movie.title}{" "}
           </h1>
           <h1 className="my-[0.5rem]">
             <span className="font-bold ">Release Date: </span>{" "}
