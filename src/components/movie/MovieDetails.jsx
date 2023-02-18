@@ -13,7 +13,6 @@ export const MovieDetails = ({ item }) => {
         .then((res) => {
           setMovieLoading(false);
           setMovie(res.data);
-          console.log(res);
         });
     } catch (err) {
       console.log(err);
@@ -41,12 +40,12 @@ export const MovieDetails = ({ item }) => {
           <p className="my-[0.5rem]">
             <span className="font-bold">Overview: </span> {movie.overview}
           </p>
-          <p className="my-[0.5rem]">
+          <div className="my-[0.5rem]">
             <span className="font-bold">Genres: </span>{" "}
             {movie?.genres?.map((item) => {
               return <p>{item.name}</p>;
             })}
-          </p>
+          </div>
         </>
       )}
     </section>
