@@ -70,6 +70,7 @@ export const MovieList = () => {
           />
           <FaSearch className="text-[#424242]" />
         </form>
+        {/* <SearchBar movies={movies} setMovies={setMovies} /> */}
         <div>
           <FilterGenre setMovies={setMovies} />
         </div>
@@ -101,17 +102,17 @@ export const MovieList = () => {
                     onPointerEnter={() => handleHover(movie.id)}
                     onClick={() => handleSelectedMovie(movie)}
                    
-                    className="relative cursor-pointer max-w-[300px] mb-[2rem] mx-[1rem] "
+                    className="relative cursor-pointer max-w-[300px] mb-[2rem] mx-[1rem]  "
                   >
                     <img
                       src={API_IMG + movie.poster_path}
-                      className="rounded-xl w-[300px] h-[300px]"
+                      className="rounded-xl w-[300px] h-[300px] "
                       alt=""
                     />
 
                     {hover === movie.id ? (
-                      <div className="flex flex-col justify-center items-center absolute top-0 bottom-0 left-0 right-0 h-[300px] bg-[rgba(0,0,0,0.5)] transition-all">
-                        <div className="">
+                      <div className="flex flex-col justify-center items-center absolute top-0 bottom-0 left-0 right-0 h-[300px] bg-[rgba(0,0,0,0.5)]">
+                        <div className="scale-75 hover:scale-100 ease-in duration-500">
                           <h3 className="font-bold px-[0.5rem]">
                             {movie.original_title}
                           </h3>

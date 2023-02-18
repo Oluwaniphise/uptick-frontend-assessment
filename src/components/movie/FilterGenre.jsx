@@ -39,8 +39,8 @@ export const FilterGenre = ({setMovies}) => {
 
   
   return (
-    <section className="max-w-[200px]">
-      <select onChange={(e) => setGenreFilter(e.target.value)} className="block w-full p-2 mb-6 text-sm text-black">
+    <section className="max-w-[200px] ">
+      <select onChange={(e) => setGenreFilter(e.target.value)} className="block w-full rounded-[30px] p-2 mb-6 text-sm text-black">
         <option value="nothing">Filter by genre</option>
         {genres.map((genre) => {
           return <option key={genre.id} value={genre.id}>{genre.name}</option>;

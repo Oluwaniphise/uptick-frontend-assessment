@@ -5,15 +5,16 @@ export const SearchBar = ({ movies, setMovies }) => {
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
-
+    // console.log(search)
+    // if(search.toLowerCase() === "") return setMovies(movies)
     const newMovies = movies.filter((movie) => {
       return search.toLowerCase() === ""
         ? movie
-        : movie.original_title.toLowerCase().includes(search);
+        : movie.original_title.toLowerCase().includes(search.toLowerCase());
     });
     setMovies(newMovies);
   };
-
+console.log(movies)
   return (
     <section>
       <form className="bg-white flex flex-row px-[3%] justify-between items-center  mb-[1.5rem] max-w-[350px] rounded-[30px]">
