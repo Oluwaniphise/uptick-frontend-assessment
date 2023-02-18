@@ -70,7 +70,6 @@ export const MovieList = () => {
           />
           <FaSearch className="text-[#424242]" />
         </form>
-        {/* <SearchBar movies={movies} setMovies={setMovies} /> */}
         <div>
           <FilterGenre setMovies={setMovies} />
         </div>
@@ -93,7 +92,7 @@ export const MovieList = () => {
                   ? item
                   : item.original_title
                       .toLowerCase()
-                      .includes(search.toLowerCase());
+                      .includes(search.toLowerCase())
               })
               .map((movie) => {
                 return (
