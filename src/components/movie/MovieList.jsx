@@ -56,7 +56,7 @@ export const MovieList = () => {
     setSelectedMovie(movie);
     setShowMovieModal(true);
   };
-
+  console.log(movies);
   return (
     <section className="py-[4rem] container mx-auto ">
       <ToastContainer />
@@ -85,46 +85,51 @@ export const MovieList = () => {
         <IsLoading />
       ) : (
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {movies &&
-            movies
-              .filter((item) => {
-                return search.toLowerCase() === ""
-                  ? item
-                  : item.original_title
-                      .toLowerCase()
-                      .includes(search.toLowerCase())
-              })
-              .map((movie) => {
-                return (
-                  <div
-                    key={movie.id}
-                    onPointerEnter={() => handleHover(movie.id)}
-                    onClick={() => handleSelectedMovie(movie)}
-                   
-                    className="relative cursor-pointer max-w-[300px] mb-[2rem] mx-[1rem]  "
-                  >
-                    <img
-                      src={API_IMG + movie.poster_path}
-                      className="rounded-xl  w-full h-full "
-                      alt=""
-                    />
+          {movies.filter((item) => {
+            return search.toLowerCase() === ""
+              ? item
+              : item.original_title
+                  .toLowerCase()
+                  .includes(search.toLowerCase());
+          }).length > 0
+            ? movies
+                .filter((item) => {
+                  return search.toLowerCase() === ""
+                    ? item
+                    : item.original_title
+                        .toLowerCase()
+                        .includes(search.toLowerCase());
+                })
+                .map((movie) => {
+                  return (
+                    <div
+                      key={movie.id}
+                      onPointerEnter={() => handleHover(movie.id)}
+                      onClick={() => handleSelectedMovie(movie)}
+                      className="relative cursor-pointer max-w-[300px] mb-[2rem] mx-[1rem]  "
+                    >
+                      <img
+                        src={API_IMG + movie.poster_path}
+                        className="rounded-xl  w-full h-full"
+                        alt=""
+                      />
 
-                    {hover === movie.id ? (
-                      <div className="flex flex-col justify-center items-center absolute top-0 bottom-0 left-0 right-0 h-full bg-[rgba(0,0,0,0.5)]">
-                        <div className="scale-75 hover:scale-100 ease-in duration-500">
-                          <h3 className="font-bold px-[0.5rem]">
-                            {movie.original_title}
-                          </h3>
-                          <p className="mt-[0.5rem] flex items-center justify-center">
-                            <FaPlusCircle />
-                          </p>
+                      {hover === movie.id ? (
+                        <div className="flex flex-col justify-center items-center absolute top-0 bottom-0 left-0 right-0 h-full bg-[rgba(0,0,0,0.5)]">
+                          <div className="scale-75 hover:scale-100 ease-in duration-500">
+                            <h3 className="font-bold px-[0.5rem]">
+                              {movie.original_title}
+                            </h3>
+                            <p className="mt-[0.5rem] flex items-center justify-center">
+                              <FaPlusCircle />
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                    ) : null}
-                  </div>
-                );
-              })}
-              
+                      ) : null}
+                    </div>
+                  );
+                })
+            : "No movies available"}
         </div>
       )}
     </section>
