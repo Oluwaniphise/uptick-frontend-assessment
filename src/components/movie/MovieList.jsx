@@ -8,6 +8,7 @@ import { SearchBar } from "./SearchBar";
 import { FaSearch } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import { FilterGenre } from "./FilterGenre";
+import { FilterDate } from "./FilterDate";
 
 const API_IMG = "https://image.tmdb.org/t/p/w500";
 
@@ -70,8 +71,10 @@ export const MovieList = () => {
           />
           <FaSearch className="text-[#424242]" />
         </form>
-        <div>
+        <div className="flex flex-row gap-[2rem]">
           <FilterGenre setMovies={setMovies} />
+
+          <FilterDate  setMovies={setMovies} />
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import { Hero } from './components/Hero'
 import { MovieList } from './components/movie/MovieList'
 import { Navbar } from './components/Navbar'
 import 'react-toastify/dist/ReactToastify.css';
+import { Footer } from './components/Footer';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <Hero />
       <MovieList />
+      <Footer />
     </div>
   )
 }
