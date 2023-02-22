@@ -5,12 +5,12 @@ import axios from "axios";
 export const FilterDate = ({ setMovies }) => {
   const [date, setDate] = useState("");
 
-  const getMoviesGenres = async () => {
+  const getMoviesDate = async () => {
     try {
       await axios
         .get(
-          `${API_URL}discover/movie?api_key=${API_KEY}&release_date.lte
-          ="${date}"`
+          `${API_URL}discover/movie?api_key=${API_KEY}&release_date.gte
+          ='${date}"`
         )
         .then((res) => {
           console.log(res);
@@ -22,10 +22,9 @@ export const FilterDate = ({ setMovies }) => {
   };
 
   useEffect(() => {
-    getMoviesGenres();
+    getMoviesDate();
   }, [date]);
 
-  console.log(date);
   return (
     <section className="max-w-[200px] ">
       <input
