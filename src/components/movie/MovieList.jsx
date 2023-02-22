@@ -4,7 +4,6 @@ import { API_URL, API_KEY } from "../base_url";
 import { IsLoading } from "../IsLoading";
 import { FaPlusCircle } from "react-icons/fa";
 import { MovieDetailModal } from "./MovieDetailModal";
-import { SearchBar } from "./SearchBar";
 import { FaSearch } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import { FilterGenre } from "./FilterGenre";
