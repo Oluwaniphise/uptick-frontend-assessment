@@ -8,38 +8,29 @@ import { FaSearch } from "react-icons/fa";
 import { ToastContainer } from "react-toastify";
 import { FilterGenre } from "./FilterGenre";
 import { FilterDate } from "./FilterDate";
+import { useMovieStore } from "../app/movieStore";
 
 const API_IMG = "https://image.tmdb.org/t/p/w500";
 
 export const MovieList = () => {
+  const { fetchMovieAPI, zustMovies, movieLoading } = useMovieStore(
+    (state) => ({
+      fetchMovieAPI: state.getMovies,
+      zustMovies: state.movies,
+      movieLoading: state.movieLoading,
+    })
+  );
+
   //states
-  const [movies, setMovies] = useState([]);
   const [showTitle, setShowTitle] = useState(false);
   const [hover, setHover] = useState(null);
-  const [movieLoading, setMovieLoading] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState({});
   const [showMovieModal, setShowMovieModal] = useState(false);
   const [search, setSearch] = useState("");
 
-  // function that calls the TMDB API
-  const fetchMovies = async () => {
-    setMovieLoading(true);
-    try {
-      await axios
-        .get(`${API_URL}discover/movie?api_key=${API_KEY}`)
-        .then((res) => {
-          setMovieLoading(false);
-          setMovies(res.data.results);
-        });
-    } catch (err) {
-      console.log(err);
-      setMovieLoading(false);
-    }
-  };
-
   // useEffect loads the function when page renders
   useEffect(() => {
-    fetchMovies();
+    fetchMovieAPI();
   }, []);
 
   // handles the over event so one movie title and detail is shown at a time
@@ -56,7 +47,6 @@ export const MovieList = () => {
     setSelectedMovie(movie);
     setShowMovieModal(true);
   };
-  console.log(movies);
   return (
     <section className="py-[4rem] container mx-auto ">
       <ToastContainer />
@@ -71,9 +61,9 @@ export const MovieList = () => {
           <FaSearch className="text-[#424242]" />
         </form>
         <div className="flex flex-row gap-[2rem]">
-          <FilterGenre setMovies={setMovies} />
+          <FilterGenre />
 
-          <FilterDate  setMovies={setMovies} />
+          {/* <FilterDate  setMovies={setMovies} /> */}
         </div>
       </div>
 
@@ -87,14 +77,14 @@ export const MovieList = () => {
         <IsLoading />
       ) : (
         <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {movies.filter((item) => {
+          {zustMovies.filter((item) => {
             return search.toLowerCase() === ""
               ? item
               : item.original_title
                   .toLowerCase()
                   .includes(search.toLowerCase());
           }).length > 0
-            ? movies
+            ? zustMovies
                 .filter((item) => {
                   return search.toLowerCase() === ""
                     ? item

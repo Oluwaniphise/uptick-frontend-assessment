@@ -1,40 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { API_URL, API_KEY } from "../base_url";
-import axios from "axios";
+import { useMovieStore } from "../app/movieStore";
 
-export const FilterGenre = ({setMovies}) => {
-  const [genres, setGenres] = useState([]);
+export const FilterGenre = () => {
+  const {genres, getGenres, getSelectedGenreMovies} = useMovieStore((state) => ({
+    genres: state.genres,
+    getGenres:state.getGenres,
+    getSelectedGenreMovies: state.getSelectedGenreMovies,
+
+  }))
+
   const [genreFilter, setGenreFilter] = useState(28);
 
-  const getAllGenres = async () => {
-    try {
-      await axios
-        .get(`${API_URL}genre/movie/list?api_key=${API_KEY}`)
-        .then((res) => {
-          setGenres(res.data.genres);
-        });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const getMoviesGenres =  async() => {
-    try {
-        await axios
-          .get(`${API_URL}discover/movie?api_key=${API_KEY}&with_genres=${genreFilter}`)
-          .then((res) => {
-            // setGenres(res.data.genres);
-            console.log(res)
-            setMovies(res.data.results)
-          });
-      } catch (err) {
-        console.log(err);
-      }
-
-  }
-
   useEffect(() => {
-    getAllGenres();
-    getMoviesGenres();
+    getGenres()
+    getSelectedGenreMovies(genreFilter)
   }, [genreFilter]);
 
   
